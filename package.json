@@ -1,0 +1,23 @@
+{
+  "name": "credit",
+  "version": "1.0.0",
+  "description": "A website for finding credit card benifits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon app.js"
+  },
+  "author": "Daniel Orbach",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  },
+  "nodemonConfig" : {
+    "restartable" : "rs",
+    "ignore" : [],
+    "delay" : 2500 
+  }
+}
