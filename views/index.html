@@ -1,11 +1,41 @@
 <html>
     <head>
-
+        <link href="index.css" type="text/css" rel="stylesheet"> 
     </head>
     <body>
         <header> 
-            <h1>CreditCards</h1>
-            <h2> Make the most of your credit card benifits </h2>
+            <h1 id='Title'>CreditSurf</h1>
+            <h2 id="SubTitle">All the info you need to make the most of your credit cards</h2>
         </header>
+        <main>
+            <div id="Forms" class="form-container">
+                <div id="AccountForm" class="form-child">  
+                    <form action="/cards" method="GET">
+                        <h3>Create an account to keep track of your benifits</h3> 
+                        <input type="submit" id="SubmitCardSearch" class="SubmitButton">  
+                    <!-- NOTE THAT ASIDE FROM NAME, /CARDS DOES not support ROUTING MUST IMPLEMENT THIS LATER-->
+                    </form>
+                </div> 
+                <div id="NameSearchForm" class="form-child">
+                    <form action="/cards" method="GET">
+                        <h3>Search by Card Name</h3>  
+                        <input type="text" name="CardName" id="Card-Search" class="SearchBar">
+                        <input type="submit" id="SubmitCardSearch" class="SubmitButton">  
+                    </form>
+                </div> 
+                <div id="BenifitSearchForm" class="form-child"> 
+                    <form action="/cards" method="GET">
+                        <h3>Search by Benifits</h3>  
+                        <input type="text" name="CardName" id="Card-Search" class="SearchBar">
+                        <input type="submit" id="SubmitCardSearch" class="SubmitButton">  
+                    
+                    <!-- NOTE THAT ASIDE FROM NAME, /CARDS DOES not support ROUTING MUST IMPLEMENT THIS LATER-->
+                    </form>
+                </div> 
+            </div>
+        </main>
+        <footer>
+            <p>Created by Daniel and Doron Orbach<p>
+        </footer>
     </body> 
 </html>

@@ -1,7 +1,9 @@
 const express = require('express');
 const chalk = require ("chalk");
 const dotenv = require ("dotenv").config();
-const path = require("path")
+const path = require("path");
+
+const cards = require("./routes/cards");
  
 const app = express();
 const port = process.env.PORT;
@@ -11,6 +13,12 @@ const port = process.env.PORT;
 app.get( '/', (req, res) => {
     res.sendFile(path.join(__dirname, '/views/index.html'));
 })
+
+//Routing for card searches
+app.use('/cards', cards);
+
+//Giving public access to css and js files
+app.use(express.static('public'));
 
 
 //Starting upp App
