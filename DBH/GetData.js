@@ -17,14 +17,39 @@ const DataBus = {
 
         try {
             await client.connect();
-            const database = client.db('sample_mflix');
-            const collection = database.collection('movies');
+            db = client.db(process.env.DB_NAME);
+            collection = db.collection(process.env.DB_COLLECTION);
             console.log(chk.green('GetData.js: Connected to DB successfully'));
 
         } catch (error) {
             console.log(chk.red(`GetData.js: Error connecting to DB`));
             throw error;
         }
+
+    },
+
+
+    //Basic Search For Cards by the Card Name 
+    //THERE MUST BE A TEXT INDEX IN THE MONGO DATABASE FOR THIS TO WORK
+    async getCards(cardName){
+        
+        //Checking for valid connection
+        if(!collection || !db){
+            throw "No Connection To Database";
+        }
+
+        let result; 
+        try {
+
+            result = await collection.find({'$text' : {'$search' : cardName}}).toArray();
+
+        } catch (error) {
+            console.log(chk.red(`GetData.js: ${error}`));
+            result = 'Error';
+        } finally {
+            return (result);
+        }
+
 
     }
 
