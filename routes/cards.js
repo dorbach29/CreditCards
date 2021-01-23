@@ -2,7 +2,7 @@ const express = require('express');
 const chk = require('chalk')
 const path = require("path");
 const DataBus = require("./../DBH/GetData");
-const {createPage} = require('./createCards');
+const {createPage} = require('./SSR');
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
 
         const data = await DataBus.getCards(req.query.CardName);
         res.send(createPage(data));
-        
+
     } catch (err) {
         console.log(chk.red(`cards.js: `) + err);
         throw err;

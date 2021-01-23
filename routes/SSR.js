@@ -1,4 +1,4 @@
-const createPageFrame = () => `
+const createCardListFrame = () => `
 <html>
 <head>
     <link href="css/index.css" type="text/css" rel="stylesheet"> 
@@ -74,7 +74,7 @@ const createItemFrame = () => `
 function createPage(data){
 
     //Creating HTML FRAME
-    const htmlFrame = createPageFrame();
+    const htmlFrame = createCardListFrame();
 
     //Creating List
     let list = ''
