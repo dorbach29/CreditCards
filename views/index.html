@@ -1,26 +1,42 @@
 <html>
     <head>
-        <link href="index.css" type="text/css" rel="stylesheet"> 
+        <link href="css/index.css" type="text/css" rel="stylesheet"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <header> 
-            <h1 id='Title'>CREDIT SURF</h1>
-            <h2 id="SubTitle">
-                Save Money On Trips By Finding Your Credit Card's Car Rental Insurance Policy
-            </h2>
+            <div class='navbar-logo'>
+                <a href='/'>
+                    <div id='MainLogo'> 
+                        <img src="images/Logo.png" alt="CreditSurf Logo">
+                    </div>
+                </a>
+                <h2>
+                    Save Money By Finding Your Credit Card's Car Rental Insurance Policy
+                </h2>
+            </div>
         </header>
         <main>
-            <div id="Forms" class="form-container">
-                <div id="NameSearchForm" class="form-child">
+            
+            
+            <div id='MainFormBanner'>
+                <div class='main-form'>
                     <form action="/cards" method="GET">
-                        <h3>Search For Your Card</h3>  
-                        <input type="text" name="CardName" id="Card-Search" class="SearchBar">
+                        <h2 class='subtitle'>Search For Your Card</h2>  
+                        <input type="text" name="CardName" id="Card-Search" class="SearchBar" required>
                         <input type="submit" id="SubmitCardSearch" class="SubmitButton">  
                     </form>
                 </div> 
             </div>
-            <div> 
-                <p>Credit Card Rental Insurance Policies typically differ in the countries they are available in, the type of coverage they provide, the price limits alloted, and the maximum rental periods they allow for. Most only provide coverage for damage/theft of the rental vehicle. Almost all will require you to decline the CDW offered by the rental company.</p>
+
+
+            <div class='info-section'> 
+                <h2 class='subtitle'>About Rental Insurance Policies</h3>
+                <div class="info-paragraph">
+                    <p>
+                        Credit Card Rental Insurance Policies typically differ in the countries they are available in, the type of coverage they provide, the price limits alloted, and the maximum rental periods they allow for.
+                        Most only provide coverage for damage/theft of the rental vehicle. Credit Card Rental Insurance Policies typically differ in the countries they are available in, the type of coverage they provide, the price limits alloted, and the maximum rental periods they allow for. Most only provide coverage for damage/theft of the rental vehicle. 
+                    </div>
             </div>
         </main>
         <footer>

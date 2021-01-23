@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    background-color : #f8f8f8;
+}
+
+
+header {
+    background-color: #67AECA;
+    font-family: Tahoma;
+    color: #5f0f4e;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+}
+
+main {
+    text-align: center;
+    font-family: Tahoma;
+    background-color: #ffffff;
+    width: 98%;
+    margin: 1rem;
+    margin-top: 7rem;
+}
+
+.card-list-element {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #DFDEFA;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.25rem;
+
+}
+
+.subtitle {
+    color : #E52A6F;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 0 auto;
+    padding-left: 0 auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.label {
+    color : #E52A6F;
+}
+
+.purple-box{
+    background-color : #675682;
+}
+
+.text-box{
+    background-color : #f2f2f2;
+}
+
+.info-paragraph {
+    font-family: Arial;
+    font-size: 22px;
+    line-height: 1.5em;
+    color: black;
+}   
+
+.info-section{
+    text-align: left;
+}
+
+.info-box {
+    border-color: #67AECA;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius : 1rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    line-height: 1.7em;
+    font-family: Arial;
+}
+
+
+.navbar-search{
+    display: flex;
+    align-items: center;
+}
+
+.nav-search-form{
+    margin: 0 auto;
+}
+
+.navbar-logo{
+    display: flex;
+}
+
+.nav-subtitle{
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+.sublogo{
+    padding: 1rem;
+}
+
+.basic-list{
+    list-style-type: none;
+}
+#MainCardList {
+    list-style-type: none;
+    background-color: #675682;
+    height: 100%;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+
+#MainFormBanner {
+    background-image: url('/images/pictures/ParkingBackground.jpg');
+    background-size:  cover;
+    background-repeat: no-repeat;
+    height: 77%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

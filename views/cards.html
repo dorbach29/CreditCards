@@ -1,41 +1,91 @@
 <html>
     <head>
-        <link href="index.css" type="text/css" rel="stylesheet"> 
+        <link href="css/index.css" type="text/css" rel="stylesheet"> 
+        <script src="myScript.js"></script>
     </head>
     <body>
-        <header> 
-            <h1 id='Title'>CREDIT SURF</h1>
-            <div id="HeaderSearchForm" class="header-search-form">
-                <form action="/cards" method="GET">
-                    <h3>Search For Your Card</h3>  
-                    <input type="text" name="CardName" id="Card-Search" class="SearchBar">
+        <header>
+            <div class='navbar-logo'>
+                <a href='/'>
+                    <div id='MainLogo'> 
+                        <img src="images/Logo.png" alt="CreditSurf Logo">
+                    </div>
+                </a>
+                <h2 class='sublogo' id='sublogo'>
+                    Save Money By Finding Your Credit Card's Car Rental Insurance Policy
+                </h2>
+            </div>
+            
+
+            <div class='navbar-search'>
+                <h2 class='subtitle nav-subtitle'>New Search</h2> 
+                <form action="/cards" method="GET" class='nav-search-form'> 
+                    <input type="text" name="CardName" id="Card-Search" class="SearchBar" required>
                     <input type="submit" id="SubmitCardSearch" class="SubmitButton">  
                 </form>
-            </div> 
+            </div>
+
+
         </header>
         <main>
-            <ul id='CardList'>
+            <ul id='MainCardList'>
                 <li>
-                    <div class='Card'> 
-                        <img src='images/CapitalOneSavorCard.png' alt="Capital One Savor Card">
-                        <div class="card-info">
-                            <div class="card-name">
-                                <h4>Card Name:</h4>
-                                <h6>Capital One Savor Card</h6>
-                            </div>
-                            <div class="card-bank">
-                                <h4>Bank:</h4>
-                                <h6>Capital One</h6>
-                            </div>
-                            <div class="card-network">
-                                <h4>Credit Network:</h4>
-                                <h6>Mastercard</h6>
-                            </div>
-                        </div>
-                        <div class="card-insurance">
-                            <h4>Insurance Provided:</h4>
-                            <h6>Primary</h6>
-                        </div>
+                    <a class='card-list-element' href='/cards/CapitalOneSavorCard'> 
+                    <img src='images/cards/CapitalOneSavorCard.png' alt="Capital One Savor Card">
+                    <div class="card-name">
+                        <h4>Card Name:</h4>
+                        <h6>Capital One Savor Card</h6>
+                    </div>
+                    <div class="card-bank">
+                        <h4>Bank:</h4>
+                        <h6>Capital One</h6>
+                    </div>
+                    <div class="card-network">
+                        <h4>Credit Network:</h4>
+                        <h6>Mastercard</h6>
+                    </div>
+                    <div class="card-insurance">
+                        <h4>Insurance Provided:</h4>
+                        <h6>Primary</h6>
+                    </div>
+                    </a>
+                </li>
+                <li class='card-list-element'> 
+                    <img src='images/cards/CapitalOneSavorCard.png' alt="Capital One Savor Card">
+                    <div class="card-name">
+                        <h4>Card Name:</h4>
+                        <h6>Capital One Savor Card</h6>
+                    </div>
+                    <div class="card-bank">
+                        <h4>Bank:</h4>
+                        <h6>Capital One</h6>
+                    </div>
+                    <div class="card-network">
+                        <h4>Credit Network:</h4>
+                        <h6>Mastercard</h6>
+                    </div>
+                    <div class="card-insurance">
+                        <h4>Insurance Provided:</h4>
+                        <h6>Primary</h6>
+                    </div>
+                </li>
+                <li class='card-list-element'> 
+                    <img src='images/cards/CapitalOneSavorCard.png' alt="Capital One Savor Card">
+                    <div class="card-name">
+                        <h4>Card Name:</h4>
+                        <h6>Capital One Savor Card</h6>
+                    </div>
+                    <div class="card-bank">
+                        <h4>Bank:</h4>
+                        <h6>Capital One</h6>
+                    </div>
+                    <div class="card-network">
+                        <h4>Credit Network:</h4>
+                        <h6>Mastercard</h6>
+                    </div>
+                    <div class="card-insurance">
+                        <h4>Insurance Provided:</h4>
+                        <h6>Primary</h6>
                     </div>
                 </li>
             </ul>
