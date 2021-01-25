@@ -115,7 +115,6 @@ main {
 #MainCardList {
     list-style-type: none;
     background-color: #675682;
-    height: 100%;
     margin: 1rem;
     padding: 1rem;
 }

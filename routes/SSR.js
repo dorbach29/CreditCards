@@ -1,3 +1,5 @@
+const chk = require('chalk');
+
 const createCardListFrame = () => `
 <html>
 <head>
@@ -66,10 +68,13 @@ const createItemFrame = () => `
 
 //Program works as follows :
     //Runs through each Document it recives.
-    //For Each header in that Document, sees if it can place it into a list frame
+    //For each header (header regex are exact same as the headers in mongo) in the recived Data, we attempt to insert it to the list
     //Appends All List frames together
     //Inserts List Frame to mainpage
     //In html string we are replacing attributes between $% %$
+
+//Array of ways to 
+const getValueFunctions = [];
 
 function createPage(data){
 
@@ -88,8 +93,15 @@ function createPage(data){
         list += itemFrame;
     }
 
-    
-    return htmlFrame.replace('$%LIST%$', list);
+    const finalPage = htmlFrame.replace('$%LIST%$', list);
+
+    //Make Sure FinalPage is Renderd Correctly
+    const errorRegex = new RegExp(/\$%\w*%\$/);
+    if(finalPage.match(errorRegex) !== null){
+        console.log(chk.bgRed("SSR.js: WARNING Was not able to properly render page"));
+    }
+
+    return finalPage;
 
 }
 

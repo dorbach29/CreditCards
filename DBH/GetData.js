@@ -41,7 +41,11 @@ const DataBus = {
         let result; 
         try {
 
-            result = await collection.find({'$text' : {'$search' : cardName}}).toArray();
+            //Getting Data and Filtering For Nessecary Headers
+            result = await collection.find(
+                {'$text' : {'$search' : cardName}},
+                {'projection' : {'CardName' : 1, 'CardType': 1, 'CreditNetwork' : 1, "Bank" : 1, "CoverageType" : 1}}    
+            ).toArray();
 
         } catch (error) {
             console.log(chk.red(`GetData.js: ${error}`));
