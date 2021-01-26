@@ -1,6 +1,8 @@
 const chk = require('chalk');
 
-const createCardListFrame = () => `
+
+const HTMLFrames = {
+Cards : () => `
 <html>
 <head>
     <link href="css/index.css" type="text/css" rel="stylesheet"> 
@@ -41,8 +43,9 @@ const createCardListFrame = () => `
     </footer>
 </body> 
 </html>
-`
-const createItemFrame = () => `
+`,
+
+ CardListItemFrame : () => `
 <li>
     <a class='card-list-element' href='/cards/CapitalOneSavorCard'> 
         <img src='images/cards/$%_id%$.png' alt="Capital One Savor Card">
@@ -65,26 +68,42 @@ const createItemFrame = () => `
     </a>
 </li>
 `
+}
 
 //Program works as follows :
-    //Runs through each Document it recives.
-    //For each header (header regex are exact same as the headers in mongo) in the recived Data, we attempt to insert it to the list
+    //Runs through each Document it recives as data
+    //For each header in the recived Data (headers in HTML are exact same as the headers in mongo), we attempt to insert into it's frame
     //Appends All List frames together
     //Inserts List Frame to mainpage
     //In html string we are replacing attributes between $% %$
 
+
 //Array of ways to 
-const getValueFunctions = [];
+
+
+const builderFunctions = {
+    //Datatype required: Array of Documents
+    Cards : () => null,
+
+    //Datatype required: Single Full Document
+    Card : () => null,
+
+    CardList : () => null,
+
+    CardListItem : () => null,
+
+
+}
 
 function createPage(data){
 
     //Creating HTML FRAME
-    const htmlFrame = createCardListFrame();
+    const htmlFrame = HTMLFrames.Cards();
 
     //Creating List
     let list = ''
     for(let i = 0; i < data.length; i ++){
-        let itemFrame = createItemFrame();
+        let itemFrame = HTMLFrames.CardListItemFrame();
         const document = data[i];
         for(const header in document){
             const searchValue = `$%${header}%$`;

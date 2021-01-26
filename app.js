@@ -2,8 +2,8 @@ const express = require('express');
 const chalk = require ("chalk");
 const dotenv = require ("dotenv").config();
 const path = require("path");
-const cards = require("./routes/cards");
-const DataBus =  require("./DBH/GetData")
+const cards = require("./src/routes/cards");
+const DataBus =  require("./src/DBH/GetData")
  
 const app = express();
 const port = process.env.PORT;

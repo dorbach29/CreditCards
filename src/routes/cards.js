@@ -1,8 +1,8 @@
 const express = require('express');
 const chk = require('chalk')
 const path = require("path");
-const DataBus = require("./../DBH/GetData");
-const {createPage} = require('./SSR');
+const DataBus = require("../DBH/GetData");
+const {createPage} = require('../Rendering/SSR');
 
 const router = express.Router();
 
@@ -18,6 +18,7 @@ router.get('/', async (req, res, next) => {
 
     } catch (err) {
         console.log(chk.red(`cards.js: `) + err);
+        res.send("Sorry we had an error getting your file :(")
         throw err;
     }
 })
@@ -26,7 +27,7 @@ router.get('/', async (req, res, next) => {
 //For gets for a specific Cards 
 
 router.get('/:CardName', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '/../views/card.html'))
+    res.sendFile(path.join(__dirname, '../../views/card.html'))
 }) 
 
 module.exports = router; 

@@ -2,7 +2,7 @@
   "name": "credit",
   "version": "1.0.0",
   "description": "A website for finding credit card benifits",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
