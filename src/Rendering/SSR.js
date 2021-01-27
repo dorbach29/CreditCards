@@ -78,19 +78,64 @@ Cards : () => `
     //In html string we are replacing attributes between $% %$
 
 
-//Array of ways to 
+// BuilderFunctions create a html item as required. Some use HTML frames and fill them out others do not. All Require 
+// either an array of Documents, or a single document of data. 
 
 
 const builderFunctions = {
     //Datatype required: Array of Documents
-    Cards : () => null,
-
-    //Datatype required: Single Full Document
     Card : () => null,
 
-    CardList : () => null,
+    //Creates the /Cards html Page given a range of data
+    //Datatype required: Single Full Document
+    Cards : function(DocArray) {
+        
+        try { 
 
-    CardListItem : () => null,
+            const CardsFrame = HTMLFrames.Cards();
+            const CardList = this.CardList(DocArray);
+            const finalPage = CardsFrame.replace("$%LIST%$");
+
+        } catch(err) {
+            console.log(chk.red('SSR.js: Error Creating Cards'))
+            throw err; 
+        }
+
+
+    },
+
+    //Creates A List Of Cards given an Array of Documents
+    CardList : function(DocArray){
+        try {
+
+            const HTML ='';
+            for(Doc in DocArray){
+                const ListItem = this.CardListItem(Doc);
+                HTML += ListItem;
+            }
+
+            if(HTML === '') console.log(chk.bgRed('SSR.JS Warning CardList not filled'))
+            return HTML;
+        } catch(err) {
+            throw err;
+        }
+    },
+
+    CardListItem : function(Document){
+        try {
+
+            let itemFrame = HTMLFrames.CardListItemFrame();
+            for(let Header in Document){
+                const ReplaceValue = `$%${header}$%`;
+                itemFrame = itemFrame.repalce(ReplaceValue, `${document[header]}`);
+            }
+
+            return itemFrame;
+        } catch (err) {
+            console.log(chk.bgRed("SSR.hs: Warning a ListItem was not created"));
+            console.log(err);
+        }
+    },
 
 
 }
