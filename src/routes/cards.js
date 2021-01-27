@@ -14,12 +14,11 @@ router.get('/', async (req, res, next) => {
         console.log(`cards.js : ${chk.gray("GET /cards")} for ${req.query.CardName}`);
 
         const data = await DataBus.getCards(req.query.CardName);
-        res.send(createPage(data));
+        res.send(createPage('Cards', data));
 
     } catch (err) {
         console.log(chk.red(`cards.js: `) + err);
         res.send("Sorry we had an error getting your file :(")
-        throw err;
     }
 })
 

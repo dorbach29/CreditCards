@@ -94,11 +94,13 @@ const builderFunctions = {
 
             const CardsFrame = HTMLFrames.Cards();
             const CardList = this.CardList(DocArray);
-            const finalPage = CardsFrame.replace("$%LIST%$");
+            const finalPage = CardsFrame.replace("$%LIST%$", CardList);
+
+            return finalPage;
 
         } catch(err) {
             console.log(chk.red('SSR.js: Error Creating Cards'))
-            throw err; 
+            throw err;
         }
 
 
@@ -108,9 +110,10 @@ const builderFunctions = {
     CardList : function(DocArray){
         try {
 
-            const HTML ='';
-            for(Doc in DocArray){
-                const ListItem = this.CardListItem(Doc);
+
+            let HTML ='';
+            for(let index in DocArray){
+                const ListItem = this.CardListItem(DocArray[index]);
                 HTML += ListItem;
             }
 
@@ -121,51 +124,45 @@ const builderFunctions = {
         }
     },
 
-    CardListItem : function(Document){
+    CardListItem : function(document){
         try {
 
             let itemFrame = HTMLFrames.CardListItemFrame();
-            for(let Header in Document){
-                const ReplaceValue = `$%${header}$%`;
-                itemFrame = itemFrame.repalce(ReplaceValue, `${document[header]}`);
+            for(let header in document){
+                
+                const ReplaceValue = `$%${header}%$`;
+                itemFrame = itemFrame.replace(ReplaceValue, `${document[header]}`);
             }
 
             return itemFrame;
         } catch (err) {
-            console.log(chk.bgRed("SSR.hs: Warning a ListItem was not created"));
+            console.log(chk.bgRed("SSR.JS: Warning a ListItem was not created"));
             console.log(err);
+            return '';
         }
     },
 
 
 }
 
-function createPage(data){
+function createPage(pageName, data){
 
     //Creating HTML FRAME
-    const htmlFrame = HTMLFrames.Cards();
-
-    //Creating List
-    let list = ''
-    for(let i = 0; i < data.length; i ++){
-        let itemFrame = HTMLFrames.CardListItemFrame();
-        const document = data[i];
-        for(const header in document){
-            const searchValue = `$%${header}%$`;
-            itemFrame = itemFrame.replace(searchValue, `${document[header]}`);
-        }
-        list += itemFrame;
-    }
-
-    const finalPage = htmlFrame.replace('$%LIST%$', list);
+    try {
+    const page = builderFunctions[pageName](data);
 
     //Make Sure FinalPage is Renderd Correctly
     const errorRegex = new RegExp(/\$%\w*%\$/);
-    if(finalPage.match(errorRegex) !== null){
+    if(page.match(errorRegex) !== null){
         console.log(chk.bgRed("SSR.js: WARNING Was not able to properly render page"));
     }
 
-    return finalPage;
+    return page;
+
+    } catch (err){
+        console.log(chk.bgRed(`SSR.js: ${err}`));
+        throw "Unable To Render Page";
+    }
 
 }
 
