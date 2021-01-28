@@ -14,8 +14,75 @@ const HTMLFrames = require('./HTMLFrames.js');
 
 
 const builderFunctions = {
-    //Datatype required: Array of Documents
-    Card : () => null,
+    //Datatype required: Complete Document
+    Info : function(Document){
+        try {
+
+            let InfoFrame = HTMLFrames.Info(); //Getting the main HTML Frame
+            
+            const InfoHeader = this.InfoHeader(Document);
+            InfoFrame = InfoFrame.replace('$%Header%$', InfoHeader);
+
+            const InfoLimitations = this.InfoLimitations(Document);
+            InfoFrame = InfoFrame.replace('$%Limitations%$', InfoLimitations);
+
+            return InfoFrame;
+
+        } catch (err) {
+            console.log(chk.red(`SSR.js: Error building the info page`));
+            throw err;
+        }
+    },
+
+    InfoHeader : function(Document){
+
+        let InfoHeaderFrame = HTMLFrames.InfoHeader();
+        
+        //Check that the Document includes the header then insert the info
+        const HeadersRequired = ['CardName', 'CoverageType', 'CreditNetwork', 'Bank']
+        HeadersRequired.forEach(header => {
+            if (!Document.hasOwnProperty(header)) 
+                throw `SSR.JS: Missing the ${header} property in data`;
+            InfoHeaderFrame = InfoHeaderFrame.replace(`$%${header}%$`, Document[header]);
+
+        })
+
+        return InfoHeaderFrame; 
+
+    },
+
+
+    InfoLimitations : function(Document){
+        
+        let InfoLimitationsFrame = HTMLFrames.InfoLimitations();
+
+        const HeadersRequired = ['TimeDomestic', 'TimeInternational', 'PriceLimit', ]; //Headers to be plugged in 
+        const ArraysRequired = ['CountriesExcluded', 'CarsExcluded', 'CoverageLimit', 
+                                'Steps', 'ClaimSteps', 'ClaimDocuments' ]; //Need to be turned into lists before getting inserted
+
+        //Checking Document includes the required data then plugging it in 
+        //(Either by creating a list or simply plugging it in)
+        HeadersRequired.forEach(header => {
+            if (!Document.hasOwnProperty(header)) 
+                throw `SSR.JS: Missing the ${header} property in data`;
+            InfoLimitationsFrame = InfoLimitationsFrame.replace(`$%${header}%$`, `${Document[header]}`);
+        })
+
+        ArraysRequired.forEach(header => {
+            if (!Document.hasOwnProperty(header)) 
+                throw `SSR.JS: Missing the ${header} property in data`;
+            const InfoBasicList = this.InfoBasicList(Document[header]); //Creating a basic list using the array 
+            InfoLimitationsFrame = InfoLimitationsFrame.replace(`$%${header}%$`, InfoBasicList);
+        })
+
+    },
+    InfoBasicList : function(ValueArray){
+        let InfoBasicList = '';
+        ValueArray.forEach(Value => {
+            InfoBasicList += `<li>${Value}</li>`;
+        });
+        return InfoBasicList;
+    },
 
     //Creates the /Cards html Page given a range of data
     //Datatype required: Single Full Document
@@ -23,12 +90,11 @@ const builderFunctions = {
         
         try { 
 
-            const CardsFrame = HTMLFrames.Cards();
-            const CardList = this.CardList(DocArray);
-            const finalPage = CardsFrame.replace("$%LIST%$", CardList);
-
+            
+            const CardsFrame = HTMLFrames.Cards(); //Creating the frame
+            const CardList = this.CardList(DocArray); //Rendering the List
+            const finalPage = CardsFrame.replace("$%LIST%$", CardList); //Completing the HTML file
             return finalPage;
-
         } catch(err) {
             console.log(chk.red('SSR.js: Error Creating Cards'))
             throw err;

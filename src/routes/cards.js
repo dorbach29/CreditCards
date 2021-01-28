@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
 //For gets for a specific Cards 
 
 router.get('/:CardName', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../../views/card.html'))
+    res.sendFile(path.join(__dirname, '../../views/info.html'))
 }) 
 
 module.exports = router; 
