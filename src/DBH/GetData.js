@@ -55,6 +55,27 @@ const DataBus = {
         }
 
 
+    },
+
+
+    async getCardById(CardID){
+        try {
+
+            //Checking for valid connection
+            if(!collection || !db){
+                throw "No Connection To Database";
+            }
+
+            let result = await collection.findOne({'_id' : CardID})
+            if(result){
+                return result;
+            }
+            else throw "No Such Card";
+
+        } catch (err) {
+            console.log(chk.bgRed('SSR.js: getCardByID - error getting Data'));
+            throw err; 
+        }
     }
 
 }

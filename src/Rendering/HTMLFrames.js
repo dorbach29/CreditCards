@@ -54,7 +54,7 @@ const HTMLFrames = {
     
      CardListItemFrame : () => `
     <li>
-        <a class='card-list-element' href='/cards/CapitalOneSavorCard'> 
+        <a class='card-list-element' href='/cards/$%_id%$'> 
             <img src='images/cards/$%_id%$.png' alt="Capital One Savor Card">
             <div class="card-name">
                 <h4>Card Name:</h4>
@@ -196,7 +196,7 @@ const HTMLFrames = {
     <h2>$%CardName%$</h2>
     <div>
         <h3 class='label'>Bank: </h3>
-        <h3>$%BankName%$</h3>
+        <h3>$%Bank%$</h3>
         <h3 class='label'>Credit Network: </h3>
         <h3>$%CreditNetwork%$</h3>
     </div>

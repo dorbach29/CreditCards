@@ -14,6 +14,8 @@ const HTMLFrames = require('./HTMLFrames.js');
 
 
 const builderFunctions = {
+
+    //Creates the InfoPage given a Card Document
     //Datatype required: Complete Document
     Info : function(Document){
         try {
@@ -34,16 +36,19 @@ const builderFunctions = {
         }
     },
 
+    //Creates the top half of the Info page for a card given the document
+    //Datatype Required: Single Document
     InfoHeader : function(Document){
 
         let InfoHeaderFrame = HTMLFrames.InfoHeader();
-        
+
         //Check that the Document includes the header then insert the info
-        const HeadersRequired = ['CardName', 'CoverageType', 'CreditNetwork', 'Bank']
+        const HeadersRequired = ['CardName', 'CoverageType', 'CreditNetwork', 'Bank' , '_id']
         HeadersRequired.forEach(header => {
             if (!Document.hasOwnProperty(header)) 
                 throw `SSR.JS: Missing the ${header} property in data`;
-            InfoHeaderFrame = InfoHeaderFrame.replace(`$%${header}%$`, Document[header]);
+            const SearchExpression = new RegExp(`\\$%${header}%\\$`, "g");
+            InfoHeaderFrame = InfoHeaderFrame.replace(SearchExpression, Document[header]);
 
         })
 
@@ -51,7 +56,8 @@ const builderFunctions = {
 
     },
 
-
+    //Creates the limitations section of the Info Page given a Document
+    //DataType Required: Single Document
     InfoLimitations : function(Document){
         
         let InfoLimitationsFrame = HTMLFrames.InfoLimitations();
@@ -65,17 +71,25 @@ const builderFunctions = {
         HeadersRequired.forEach(header => {
             if (!Document.hasOwnProperty(header)) 
                 throw `SSR.JS: Missing the ${header} property in data`;
-            InfoLimitationsFrame = InfoLimitationsFrame.replace(`$%${header}%$`, `${Document[header]}`);
+            const SearchExpression = new RegExp(`\\$%${header}%\\$`, "g"); //Search expression allowing us to replace globaly
+            InfoLimitationsFrame = InfoLimitationsFrame.replace(SearchExpression, `${Document[header] < 0 ? 'None' : Document[header]}`); //-1 signifies that the limit does not exist
         })
 
+        //Checking that the Document includes the proper headers, turning those arrays into lists and then plugging them in
         ArraysRequired.forEach(header => {
             if (!Document.hasOwnProperty(header)) 
                 throw `SSR.JS: Missing the ${header} property in data`;
             const InfoBasicList = this.InfoBasicList(Document[header]); //Creating a basic list using the array 
-            InfoLimitationsFrame = InfoLimitationsFrame.replace(`$%${header}%$`, InfoBasicList);
+            const SearchExpression = new RegExp(`\\$%${header}%\\$`, "g"); //This way the value will be inserted at all needed occourences
+            InfoLimitationsFrame = InfoLimitationsFrame.replace(SearchExpression, InfoBasicList);
         })
 
+        return InfoLimitationsFrame;
+
     },
+
+    //Creates a basic HTML list of items given an arary
+    //Datatype Required: Array of Values
     InfoBasicList : function(ValueArray){
         let InfoBasicList = '';
         ValueArray.forEach(Value => {
@@ -130,8 +144,9 @@ const builderFunctions = {
             let itemFrame = HTMLFrames.CardListItemFrame();
             for(let header in document){
                 
-                const ReplaceValue = `$%${header}%$`;
-                itemFrame = itemFrame.replace(ReplaceValue, `${document[header]}`);
+                const ReplaceValue = `\\$%${header}%\\$`;
+                const ReplaceRegex = new RegExp(ReplaceValue, "g");
+                itemFrame = itemFrame.replace(ReplaceRegex, `${document[header]}`);
             }
 
             return itemFrame;
@@ -145,6 +160,7 @@ const builderFunctions = {
 
 }
 
+//Creates the given HTML page when supplied with the right data
 function createPage(pageName, data){
 
     //Creating HTML FRAME
@@ -160,7 +176,7 @@ function createPage(pageName, data){
     return page;
 
     } catch (err){
-        console.log(chk.bgRed(`SSR.js: ${err}`));
+        console.log(err);
         throw "Unable To Render Page";
     }
 

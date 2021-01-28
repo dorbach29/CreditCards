@@ -25,8 +25,15 @@ router.get('/', async (req, res, next) => {
 
 //For gets for a specific Cards 
 
-router.get('/:CardName', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../../views/info.html'))
+router.get('/:CardName', async (req, res, next) => {
+    try { 
+        const CardID = req.params.CardName;
+        const Card = await DataBus.getCardById(CardID);
+        res.send(createPage('Info', Card));
+    } catch (err) {
+        console.log(err);
+        res.send("Sorry we had an error fetching the card");
+    }
 }) 
 
 module.exports = router; 
